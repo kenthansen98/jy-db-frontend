@@ -59,3 +59,12 @@ export const ADD_GROUP = gql`
         }
     }
 `;
+
+export const ADD_CONVERSATION = gql`
+    mutation addConversation($animatorId: ID!, $summary: String!) {
+        addConversation(animatorId: $animatorId, summary: $summary) {
+            name
+            conversations
+        }
+    }
+`;

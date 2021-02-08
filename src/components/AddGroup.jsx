@@ -19,12 +19,6 @@ const AddGroup = () => {
         event.preventDefault();
 
         console.log("Adding group.");
-        const variables = {
-            name,
-            participants,
-            animators,
-        };
-        console.log(variables);
         try {
             await addGroup({
                 variables: {

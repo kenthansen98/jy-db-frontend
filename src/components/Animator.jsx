@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import { FIND_GROUP } from "../queries";
+import AddConversation from "./AddConversation";
 
 const Animator = () => {
     const [adding, setAdding] = useState(false);
@@ -29,7 +30,7 @@ const Animator = () => {
             ))}
 
             {adding
-                ?  <div>adding</div>
+                ?  <AddConversation animatorId={animator.id}/>
                 : <button onClick={() => setAdding(true)}>Add Conversation</button>
             }
         </div>
