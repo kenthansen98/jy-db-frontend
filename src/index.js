@@ -1,12 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 import App from "./App";
 
+const client = new ApolloClient({
+    uri: "http://localhost:4000",
+    cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
-    <Router>
-        <App />
-    </Router>,
+    <ApolloProvider client={client}>
+        <Router>
+            <App />
+        </Router>
+    </ApolloProvider>,
     document.getElementById("root")
 );
