@@ -1,15 +1,30 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import styled from 'styled-components';
 
 import Animator from "./components/Animator";
 import Group from "./components/Group";
 import GroupList from "./components/GroupList";
 import AddGroup from "./components/AddGroup";
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Header = styled.h1`
+    font-size: 3em;
+    font-family: Helvetica;
+    padding: 10px;
+    border: 3px solid;
+    border-radius: 5px
+`;
+
 const App = () => {
     return (
-        <div>
-            <h1>JY db</h1>
+        <Container>
+            <Header>JY db</Header>
             <Switch>
                 <Route path="/groups/add">
                     <AddGroup />
@@ -20,16 +35,11 @@ const App = () => {
                 <Route path="/groups/:id">
                     <Group />
                 </Route>
-                <Route path="/groups">
+                <Route path="/">
                     <GroupList />
                 </Route>
-                <Route path="/">
-                    <Link to="/groups">
-                        <button>See groups</button>
-                    </Link>
-                </Route>
             </Switch>
-        </div>
+        </Container>
     );
 };
 
