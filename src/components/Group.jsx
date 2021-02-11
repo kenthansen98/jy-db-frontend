@@ -1,8 +1,15 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import styled from "styled-components";
 
 import { FIND_GROUP } from "../queries";
+import Header from './Header';
+
+const Subheader = styled.h3`
+    font-family: Helvetica;
+    color: #595959;
+`;
 
 const Group = () => {
     const { id } = useParams();
@@ -18,14 +25,14 @@ const Group = () => {
 
     return (
         <div>
-            <h2>{group.name}</h2>
-            <h3>Animators</h3>
+            <Header>{group.name}</Header>
+            <Subheader>Animators</Subheader>
             {group.animators.map((animator, i) => (
                 <Link to={`/groups/${id}/animators/${animator.id}`} key={i}>
                     <p>{animator.name}</p>
                 </Link>
             ))}
-            <h3>Participants</h3>
+            <Subheader>Participants</Subheader>
             {group.participants.map((participant, i) => (
                 <p key={i}>
                     {participant.name} - {participant.age}

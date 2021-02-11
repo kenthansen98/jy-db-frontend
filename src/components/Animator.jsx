@@ -29,10 +29,16 @@ const Animator = () => {
                 <p key={i}>{conversation}</p>
             ))}
 
-            {adding
-                ?  <AddConversation animatorId={animator.id}/>
-                : <button onClick={() => setAdding(true)}>Add Conversation</button>
-            }
+            {adding ? (
+                <div>
+                    <AddConversation animatorId={animator.id} groupId={gid} />
+                    <button onClick={() => setAdding(false)}>Hide</button>
+                </div>
+            ) : (
+                <button onClick={() => setAdding(true)}>
+                    Add Conversation
+                </button>
+            )}
         </div>
     );
 };

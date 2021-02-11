@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import styled from 'styled-components';
 
 import Animator from "./components/Animator";
@@ -18,13 +18,17 @@ const Header = styled.h1`
     font-family: Helvetica;
     padding: 10px;
     border: 3px solid;
-    border-radius: 5px
+    border-radius: 5px;
+    align-self: center;
+    color: black;
 `;
 
 const App = () => {
     return (
         <Container>
-            <Header>JY db</Header>
+            <Link to="/" style={{textDecoration: "none"}}>
+                <Header>JY db</Header>
+            </Link>
             <Switch>
                 <Route path="/groups/add">
                     <AddGroup />

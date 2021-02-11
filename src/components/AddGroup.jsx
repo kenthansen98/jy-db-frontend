@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 import { ADD_GROUP, ALL_GROUPS } from "../queries";
 
@@ -10,6 +11,7 @@ const AddGroup = () => {
     const [participants, setParticipants] = useState([]);
     const [animator, setAnimator] = useState("");
     const [animators, setAnimators] = useState([]);
+    const history = useHistory();
 
     const [addGroup] = useMutation(ADD_GROUP, {
         refetchQueries: [{ query: ALL_GROUPS }],
@@ -37,6 +39,7 @@ const AddGroup = () => {
         setParticipants([]);
         setAnimator("");
         setAnimators([]);
+        history.push("/");
     };
 
     const addAnimator = () => {
