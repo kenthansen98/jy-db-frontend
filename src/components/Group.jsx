@@ -4,11 +4,23 @@ import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 
 import { FIND_GROUP } from "../queries";
-import Header from './Header';
+import Header from "./Header";
+import List from "./List";
+import ListItem from "./ListItem";
+import Subheader from "./Subheader";
 
-const Subheader = styled.h3`
+const ParticipantList = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #0e65f0;
+    border-radius: 5px;
     font-family: Helvetica;
-    color: #595959;
+    width: 200px;
+`;
+
+const ParticipantItem = styled.p`
+    margin-left: 20px;
+    color: #0e65f0;
 `;
 
 const Group = () => {
@@ -27,17 +39,27 @@ const Group = () => {
         <div>
             <Header>{group.name}</Header>
             <Subheader>Animators</Subheader>
-            {group.animators.map((animator, i) => (
-                <Link to={`/groups/${id}/animators/${animator.id}`} key={i}>
-                    <p>{animator.name}</p>
-                </Link>
-            ))}
+            <List>
+                {group.animators.map((animator, i) => (
+                    <ListItem
+                        as={Link}
+                        to={`/groups/${id}/animators/${animator.id}`}
+                        key={i}
+                    >
+                        {animator.name}
+                    </ListItem>
+                ))}
+            </List>
             <Subheader>Participants</Subheader>
-            {group.participants.map((participant, i) => (
-                <p key={i}>
-                    {participant.name} - {participant.age}
-                </p>
-            ))}
+            {group.participants.length > 0 ? (
+                <ParticipantList>
+                    {group.participants.map((participant, i) => (
+                        <ParticipantItem key={i}>
+                            {participant.name} - {participant.age}
+                        </ParticipantItem>
+                    ))}
+                </ParticipantList>
+            ) : null}
         </div>
     );
 };

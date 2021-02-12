@@ -1,9 +1,32 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import styled from "styled-components";
 
 import { FIND_GROUP } from "../queries";
 import AddConversation from "./AddConversation";
+import Header from "./Header";
+import List from "./List";
+import ListItem from "./ListItem";
+import Button from "./Button";
+import ButtonWrapper from "./ButtonWrapper";
+
+const Conversation = styled(ListItem)`
+    color: black;
+    border-color: black;
+`;
+
+const Line = styled.div`
+    border-left: 5px solid #0e65f0;
+    border-radius: 5px;
+    height: 50px;
+`;
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 
 const Animator = () => {
     const [adding, setAdding] = useState(false);
@@ -24,20 +47,27 @@ const Animator = () => {
 
     return (
         <div>
-            <h2>{animator.name}</h2>
-            {animator.conversations.map((conversation, i) => (
-                <p key={i}>{conversation}</p>
-            ))}
+            <Header>{animator.name}</Header>
+            <List>
+                {animator.conversations.map((conversation, i) => (
+                    <Wrapper>
+                        {i > 0 ? <Line /> : null}
+                        <Conversation key={i}>{conversation}</Conversation>
+                    </Wrapper>
+                ))}
+            </List>
 
             {adding ? (
-                <div>
+                <Wrapper>
                     <AddConversation animatorId={animator.id} groupId={gid} />
-                    <button onClick={() => setAdding(false)}>Hide</button>
-                </div>
+                    <Button onClick={() => setAdding(false)}>Hide</Button>
+                </Wrapper>
             ) : (
-                <button onClick={() => setAdding(true)}>
-                    Add Conversation
-                </button>
+                <ButtonWrapper>
+                    <Button onClick={() => setAdding(true)}>
+                        Add Conversation
+                    </Button>
+                </ButtonWrapper>
             )}
         </div>
     );

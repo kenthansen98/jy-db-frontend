@@ -4,14 +4,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { ALL_GROUPS } from "../queries";
-import Header from './Header';
-
-// const Header = styled.h2`
-//     font-family: Helvetica;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-// `;
+import Header from "./Header";
+import Button from "./Button";
+import ButtonWrapper from "./ButtonWrapper";
 
 const GroupItem = styled.div`
     padding: 25px;
@@ -33,26 +28,6 @@ const GroupItemWrapper = styled.div`
     }
 `;
 
-const Button = styled.button`
-    font-size: 0.8em;
-    margin: 1.5em;
-    padding: 15px;
-    border: 2px solid #0e65f0;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    font-family: Helvetica;
-    color: #0e65f0;
-`;
-
-const ButtonWrapper = styled.div`
-    &:hover ${Button} {
-        background-color: #f2f3f5;
-    }
-`;
-
 const GroupList = () => {
     const result = useQuery(ALL_GROUPS);
 
@@ -67,11 +42,15 @@ const GroupList = () => {
             <Header>Groups</Header>
             {groups.map((group, i) => (
                 <GroupItemWrapper key={i}>
-                    <GroupItem as={Link} to={`/groups/${group.id}`}>{group.name}</GroupItem>
+                    <GroupItem as={Link} to={`/groups/${group.id}`}>
+                        {group.name}
+                    </GroupItem>
                 </GroupItemWrapper>
             ))}
             <ButtonWrapper>
-                <Button as={Link} to="/groups/add" >Add Group</Button>
+                <Button as={Link} to="/groups/add">
+                    Add Group
+                </Button>
             </ButtonWrapper>
         </div>
     );
