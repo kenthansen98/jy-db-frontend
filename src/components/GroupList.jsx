@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { ALL_GROUPS } from "../queries";
-import Header from "./Header";
-import Button from "./Button";
-import ButtonWrapper from "./ButtonWrapper";
+import Header from "./styled/Header";
+import Button from "./styled/Button";
+import ButtonWrapper from "./styled/ButtonWrapper";
+import Subheader from "./styled/Subheader";
 
 const GroupItem = styled.div`
     padding: 25px;
@@ -32,7 +33,7 @@ const GroupList = () => {
     const result = useQuery(ALL_GROUPS);
 
     if (result.loading) {
-        return <div>loading...</div>;
+        return <Subheader>loading...</Subheader>;
     }
 
     const groups = result.data.allGroups;

@@ -4,10 +4,10 @@ import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 
 import { FIND_GROUP } from "../queries";
-import Header from "./Header";
-import List from "./List";
-import ListItem from "./ListItem";
-import Subheader from "./Subheader";
+import Header from "./styled/Header";
+import List from "./styled/List";
+import ListItem from "./styled/ListItem";
+import Subheader from "./styled/Subheader";
 
 const ParticipantList = styled.div`
     display: flex;
@@ -30,7 +30,7 @@ const Group = () => {
     });
 
     if (result.loading) {
-        return <div>loading...</div>;
+        return <Subheader>loading...</Subheader>;
     }
 
     const group = result.data.findGroup;

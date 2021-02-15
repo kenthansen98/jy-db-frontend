@@ -5,11 +5,16 @@ import styled from "styled-components";
 
 import { FIND_GROUP } from "../queries";
 import AddConversation from "./AddConversation";
-import Header from "./Header";
-import List from "./List";
-import ListItem from "./ListItem";
-import Button from "./Button";
-import ButtonWrapper from "./ButtonWrapper";
+import Header from "./styled/Header";
+import List from "./styled/List";
+import ListItem from "./styled/ListItem";
+import Button from "./styled/Button";
+import ButtonWrapper from "./styled/ButtonWrapper";
+import Subheader from "./styled/Subheader";
+
+const ConversationList = styled(List)`
+    margin-bottom: 1em;
+`;
 
 const Conversation = styled(ListItem)`
     color: black;
@@ -39,7 +44,7 @@ const Animator = () => {
     });
 
     if (result.loading) {
-        return <div>loading...</div>;
+        return <Subheader>loading...</Subheader>;
     }
 
     const group = result.data.findGroup;
@@ -48,14 +53,14 @@ const Animator = () => {
     return (
         <div>
             <Header>{animator.name}</Header>
-            <List>
+            <ConversationList>
                 {animator.conversations.map((conversation, i) => (
                     <Wrapper>
                         {i > 0 ? <Line /> : null}
                         <Conversation key={i}>{conversation}</Conversation>
                     </Wrapper>
                 ))}
-            </List>
+            </ConversationList>
 
             {adding ? (
                 <Wrapper>
